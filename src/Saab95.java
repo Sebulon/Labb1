@@ -12,7 +12,7 @@ public class Saab95 extends Car {
      * turns off turbo and the engine
      */
     public Saab95(){
-        super(2, 125, Color.red, "Saab95");
+        super(2, 125, Color.red, "Saab95", Size.MEDIUM);
 	    turboOn = false;
     }
 

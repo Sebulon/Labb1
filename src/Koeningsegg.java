@@ -6,7 +6,7 @@ public class Koeningsegg extends Car{
     private static final double trim = 1.3;
 
     Koeningsegg(){
-        super(2, 500, Color.WHITE, "Agera");
+        super(2, 500, Color.WHITE, "Agera", Size.MEDIUM);
         turboOn = false;
         stopEngine();
     }

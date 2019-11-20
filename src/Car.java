@@ -11,6 +11,7 @@ public abstract class Car implements Engine, Movable{
     private double rotationSpeed = Math.PI / 4;
     private double xPos;
     private double yPos;
+    private Size size;
 
 
     /**
@@ -20,11 +21,12 @@ public abstract class Car implements Engine, Movable{
      * @param color
      * @param modelName
      */
-    public Car(int nrDoors, double enginePower, Color color, String modelName){
+    public Car(int nrDoors, double enginePower, Color color, String modelName, Size size){
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
+        this.size = size;
 
         stopEngine();
     }
@@ -63,6 +65,10 @@ public abstract class Car implements Engine, Movable{
 
     public double getyPos() {
         return yPos;
+    }
+
+    public Size getSize(){
+        return size;
     }
 
     /**

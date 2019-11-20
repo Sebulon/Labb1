@@ -8,7 +8,7 @@ public class Scania extends Car implements Flatbed{
     private final int angleInc = 10;
 
     public Scania(){
-        super(2, 350, Color.white, "LBS141");
+        super(2, 350, Color.white, "LBS141", Size.BIG);
         stopEngine();
     }
 
