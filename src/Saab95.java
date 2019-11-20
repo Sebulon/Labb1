@@ -14,6 +14,7 @@ public class Saab95 extends Car {
     public Saab95(){
         super(2, 125, Color.red, "Saab95");
 	    turboOn = false;
+	    System.out.println("WOW");
     }
 
     public void setTurboOn(){
