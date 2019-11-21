@@ -40,7 +40,7 @@ public class Peterbilt extends Car implements Flatbed{
     public void unloadCar(){
         if(rampIsDown){
             Car car = load.pop();
-            car.UnloadSelf();
+            car.unloadSelf();
             car.currentSpeed = -10;
             car.move();
             car.currentSpeed = 0;

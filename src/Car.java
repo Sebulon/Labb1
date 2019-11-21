@@ -91,7 +91,7 @@ public abstract class Car implements Engine, Movable{
         loaded = true;
     }
 
-    public void UnloadSelf(){
+    public void unloadSelf(){
         loaded = false;
     }
 
