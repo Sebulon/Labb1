@@ -12,6 +12,7 @@ public abstract class Car implements Engine, Movable{
     private double xPos;
     private double yPos;
     private Size size;
+    private boolean loaded = false;
 
 
     /**
@@ -68,19 +69,30 @@ public abstract class Car implements Engine, Movable{
     }
 
     public void setDirection(double direction) {
-        this.direction = direction;
+        if(loaded)
+            this.direction = direction;
     }
 
     public void setxPos(double xPos) {
-        this.xPos = xPos;
+        if(loaded)
+            this.xPos = xPos;
     }
 
     public void setyPos(double yPos) {
-        this.yPos = yPos;
+        if(loaded)
+            this.yPos = yPos;
     }
 
     public Size getSize(){
         return size;
+    }
+
+    public void loadSelf(){
+        loaded = true;
+    }
+
+    public void UnloadSelf(){
+        loaded = false;
     }
 
     /**

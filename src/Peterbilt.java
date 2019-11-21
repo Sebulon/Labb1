@@ -24,7 +24,7 @@ public class Peterbilt extends Car implements Flatbed{
                     && Math.abs(car.getyPos() - getyPos()) < maxLoadDistance){
 
                 load.push(car);
-
+                car.loadSelf();
                 car.setyPos(getyPos());
                 car.setxPos(getxPos());
                 car.setDirection(getDirection());
@@ -40,6 +40,7 @@ public class Peterbilt extends Car implements Flatbed{
     public void unloadCar(){
         if(rampIsDown){
             Car car = load.pop();
+            car.UnloadSelf();
             car.currentSpeed = -10;
             car.move();
             car.currentSpeed = 0;
