@@ -28,10 +28,27 @@ public class Peterbilt extends Car implements Flatbed{
         }
     }
 
+    /**
+     * If ramp is down and method is called, remove car from stack (from flatbed)
+     * Move car backwards so it is not in the same position as the truck
+     */
     public void unloadCar(){
         if(rampIsDown){
             Car car = load.pop();
-            car.
+            car.currentSpeed = -10;
+            car.move();
+            car.currentSpeed = 0;
+        }
+    }
+
+
+    @Override
+    public void move() {
+        super.move();
+        for(Car c : load){
+            c.setxPos(this.getxPos());
+            c.setyPos(this.getyPos());
+            c.setDirection(getDirection());
         }
     }
 

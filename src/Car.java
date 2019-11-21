@@ -8,7 +8,7 @@ public abstract class Car implements Engine, Movable{
     protected double currentSpeed = 0;
     protected String modelName;
     private double direction = 0;
-    private double rotationSpeed = Math.PI / 4;
+    private double rotationSpeed = 45;
     private double xPos;
     private double yPos;
     private Size size;
@@ -56,7 +56,7 @@ public abstract class Car implements Engine, Movable{
      * @return degrees
      */
     public double getDirection() {
-        return direction * 180 / Math.PI;
+        return direction;
     }
 
     public double getxPos() {
@@ -65,6 +65,18 @@ public abstract class Car implements Engine, Movable{
 
     public double getyPos() {
         return yPos;
+    }
+
+    public void setDirection(double direction) {
+        this.direction = direction;
+    }
+
+    public void setxPos(double xPos) {
+        this.xPos = xPos;
+    }
+
+    public void setyPos(double yPos) {
+        this.yPos = yPos;
     }
 
     public Size getSize(){
@@ -83,8 +95,8 @@ public abstract class Car implements Engine, Movable{
      */
     public void turnLeft() {
         direction += rotationSpeed;
-        if(Math.PI * 2 < direction){
-            direction -= Math.PI * 2;
+        if(360 < direction){
+            direction -= 360;
         }
     }
 
@@ -95,7 +107,7 @@ public abstract class Car implements Engine, Movable{
     public void turnRight(){
         direction -= rotationSpeed;
         if(direction < 0){
-            direction += 2 * Math.PI;
+            direction += 360;
         }
     }
 
@@ -103,8 +115,8 @@ public abstract class Car implements Engine, Movable{
      * xPos and yPos is changed dependent on direction and speed
      */
     public void move() {
-        xPos += currentSpeed * Math.cos(direction);
-        yPos += currentSpeed * Math.sin(direction);
+        xPos += currentSpeed * Math.cos(Math.toRadians(direction));
+        yPos += currentSpeed * Math.sin(Math.toRadians(direction));
     }
 
     /**
