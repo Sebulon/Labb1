@@ -5,7 +5,7 @@ import java.util.Deque;
 public class Peterbilt extends Car implements Flatbed{
 
     private boolean rampIsDown = false;
-    private Deque<Car> load;
+    private final Deque<Car> load;
     private final int maxLoadDistance = 10;
 
     public Peterbilt() {
@@ -19,7 +19,7 @@ public class Peterbilt extends Car implements Flatbed{
      * @param car to be checked if can be put on stack
      */
     public void addCar(Car car){
-        if(car.getSize() != Size.BIG && rampIsDown){
+        if(car != null && car.getSize() != Size.BIG && rampIsDown){
             if(Math.abs(car.getxPos() - getxPos()) < maxLoadDistance
                     && Math.abs(car.getyPos() - getyPos()) < maxLoadDistance){
 
@@ -38,7 +38,7 @@ public class Peterbilt extends Car implements Flatbed{
      * Move car backwards so it is not in the same position as the truck
      */
     public void unloadCar(){
-        if(rampIsDown){
+        if(rampIsDown && load.size() > 0){
             Car car = load.pop();
             car.unloadSelf();
             car.currentSpeed = -10;
@@ -62,7 +62,7 @@ public class Peterbilt extends Car implements Flatbed{
 
     @Override
     protected double speedFactor() {
-        return enginePower * 0.01;
+        return rampIsDown ? 0 : enginePower * 0.01;
     }
 
     @Override
@@ -75,5 +75,13 @@ public class Peterbilt extends Car implements Flatbed{
     @Override
     public void raiseBed() {
         rampIsDown = false;
+    }
+
+    public Deque<Car> getLoad() {
+        return load;
+    }
+
+    public boolean getRampIsDown(){
+        return rampIsDown;
     }
 }

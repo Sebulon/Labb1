@@ -29,7 +29,7 @@ public class Scania extends Car implements Flatbed{
     @Override
     protected double speedFactor() {
         double turbo = 1;
-        if (turboOn);
+        if (turboOn)
             turbo = 1.3;
         return degreesOnFlatbed == 0 ? enginePower * 0.01 * turbo : 0;
     }

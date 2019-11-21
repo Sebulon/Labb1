@@ -21,6 +21,10 @@ public class ScaniaTest {
 
     @Test
     public void lowerBed() {
+        scania.raiseBed();
+        scania.raiseBed();
+        scania.lowerBed();
+        scania.lowerBed();
         scania.lowerBed();
         assertEquals(0, scania.getDegreesOnFlatbed(), 0.0);
     }

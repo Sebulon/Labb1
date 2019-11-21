@@ -2,16 +2,16 @@ import java.awt.*;
 
 public abstract class Car implements Engine, Movable{
 
-    protected int nrDoors;
-    protected double enginePower;
-    protected Color color;
-    protected double currentSpeed = 0;
-    protected String modelName;
+    private final int nrDoors;
+    final double enginePower;
+    private Color color;
+    double currentSpeed = 0;
+    private final String modelName;
     private double direction = 0;
-    private double rotationSpeed = 45;
+    private final double rotationSpeed = 45;
     private double xPos;
     private double yPos;
-    private Size size;
+    private final Size size;
     private boolean loaded = false;
 
 
@@ -68,17 +68,17 @@ public abstract class Car implements Engine, Movable{
         return yPos;
     }
 
-    public void setDirection(double direction) {
+    void setDirection(double direction) {
         if(loaded)
             this.direction = direction;
     }
 
-    public void setxPos(double xPos) {
+    void setxPos(double xPos) {
         if(loaded)
             this.xPos = xPos;
     }
 
-    public void setyPos(double yPos) {
+    void setyPos(double yPos) {
         if(loaded)
             this.yPos = yPos;
     }
