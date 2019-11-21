@@ -5,13 +5,13 @@ import java.util.Deque;
 public class Peterbilt extends Car implements Flatbed{
 
     private boolean rampIsDown = false;
-    private final Deque<Car> load;
     private final int maxLoadDistance = 10;
+    private StackLoadCar load;
 
     public Peterbilt() {
         super(2, 700, Color.blue, "Peterbilt", Size.BIG);
 
-        load = new ArrayDeque<>();
+        load = new StackLoadCar(new Size[]{Size.MEDIUM, Size.SMALL, Size.TINY});
     }
 
     /**
@@ -19,18 +19,8 @@ public class Peterbilt extends Car implements Flatbed{
      * @param car to be checked if can be put on stack
      */
     public void addCar(Car car){
-        if(car != null && car.getSize() != Size.BIG && rampIsDown){
-            if(Math.abs(car.getxPos() - getxPos()) < maxLoadDistance
-                    && Math.abs(car.getyPos() - getyPos()) < maxLoadDistance){
-
-                load.push(car);
-                car.loadSelf();
-                car.setyPos(getyPos());
-                car.setxPos(getxPos());
-                car.setDirection(getDirection());
-                car.stopEngine();
-            }
-        }
+        if(Math.abs(getxPos() - car.getxPos()) < maxLoadDistance && Math.abs(getyPos() - car.getyPos()) < maxLoadDistance)
+            load.loadVehicle(getxPos(), getyPos(), car, rampIsDown);
     }
 
     /**
@@ -38,8 +28,8 @@ public class Peterbilt extends Car implements Flatbed{
      * Move car backwards so it is not in the same position as the truck
      */
     public void unloadCar(){
-        if(rampIsDown && load.size() > 0){
-            Car car = load.pop();
+        Car car = load.unloadLastVehicle(rampIsDown);
+        if(car != null){
             car.unloadSelf();
             car.currentSpeed = -10;
             car.move();
@@ -53,7 +43,7 @@ public class Peterbilt extends Car implements Flatbed{
     @Override
     public void move() {
         super.move();
-        for(Car c : load){
+        for(Car c : load.cars){
             c.setxPos(this.getxPos());
             c.setyPos(this.getyPos());
             c.setDirection(getDirection());
@@ -78,7 +68,7 @@ public class Peterbilt extends Car implements Flatbed{
     }
 
     public Deque<Car> getLoad() {
-        return load;
+        return load.cars;
     }
 
     public boolean getRampIsDown(){

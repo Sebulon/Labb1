@@ -5,5 +5,5 @@
  * Tiny ~ bicycles and motorcycles
  */
 public enum Size {
-    BIG, MEDIUM, SMALL, TINY
+    GIANT, BIG, MEDIUM, SMALL, TINY
 }
