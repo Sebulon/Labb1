@@ -24,6 +24,11 @@ public class Peterbilt extends Car implements Flatbed{
                     && Math.abs(car.getyPos() - getyPos()) < maxLoadDistance){
 
                 load.push(car);
+
+                car.setyPos(getyPos());
+                car.setxPos(getxPos());
+                car.setDirection(getDirection());
+                car.stopEngine();
             }
         }
     }
@@ -41,7 +46,9 @@ public class Peterbilt extends Car implements Flatbed{
         }
     }
 
-
+    /**
+     * Uses Car.move for own movement as well as it moves all the cars in load
+     */
     @Override
     public void move() {
         super.move();
@@ -54,7 +61,7 @@ public class Peterbilt extends Car implements Flatbed{
 
     @Override
     protected double speedFactor() {
-        return 0;
+        return enginePower * 0.01;
     }
 
     @Override
