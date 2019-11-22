@@ -1,13 +1,12 @@
 import java.awt.*;
 
-public abstract class Car extends MotorVehicle {
+public abstract class Car extends MotorVehicle implements Transportable{
 
     private final int nrDoors;
     private boolean loaded = false;
 
 
     /**
-     *
      * @param nrDoors
      * @param enginePower
      * @param color
@@ -22,12 +21,22 @@ public abstract class Car extends MotorVehicle {
         return nrDoors;
     }
 
-    void setXPos(double xPos){
+    @Override
+    public double getX() {
+        return super.getxPos();
+    }
+
+    @Override
+    public double getY() {
+       return super.getyPos();
+    }
+
+    public void setX(double xPos){
         if(loaded)
             this.xPos = xPos;
     }
 
-    void setYPos(double yPos){
+    public void setY(double yPos){
         if(loaded)
             this.yPos = yPos;
     }
@@ -44,6 +53,7 @@ public abstract class Car extends MotorVehicle {
 
 
     public void loadSelf(){
+        stopEngine();
         loaded = true;
     }
 
@@ -51,4 +61,10 @@ public abstract class Car extends MotorVehicle {
         loaded = false;
     }
 
+    @Override
+    public void followTransport(double speed, double direction) {
+        setSpeed(speed);
+        setDirection(direction);
+        move();
+    }
 }

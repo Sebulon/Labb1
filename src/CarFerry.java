@@ -2,13 +2,13 @@ import java.awt.*;
 
 public class CarFerry extends MotorVehicle{
 
-    StackLoadCar<Car> carLoad;
+    Transporter<Car> carLoad;
     boolean docked;
 
     public CarFerry() {
         super(21000, Color.WHITE, "Stena", Size.GIANT);
         stopEngine();
-        carLoad = new StackLoadCar<>(new Size[]{Size.BIG, Size.MEDIUM, Size.SMALL, Size.TINY});
+        carLoad = new Transporter<>(new Size[]{Size.BIG, Size.MEDIUM, Size.SMALL, Size.TINY});
         docked = true;
     }
 
@@ -17,7 +17,7 @@ public class CarFerry extends MotorVehicle{
      * @param car
      */
     public void loadCar(Car car){
-        carLoad.loadVehicle(getxPos(), getyPos(), car, docked);
+        carLoad.loadTransportable(getxPos(), getyPos(), car, docked);
     }
 
     /**
@@ -25,7 +25,7 @@ public class CarFerry extends MotorVehicle{
      * @return the unloaded car
      */
     public Car unloadCar(){
-        return carLoad.unloadFirstVehicle(docked,
+        return carLoad.unloadFirstTransportable(docked,
                 10 * Math.cos(Math.toRadians(getDirection())),
                 10 * Math.sin(Math.toRadians(getDirection())));
     }
@@ -49,7 +49,7 @@ public class CarFerry extends MotorVehicle{
     @Override
     public void move() {
         super.move();
-        carLoad.moveCars(getCurrentSpeed(), getDirection());
+        carLoad.followTransport(getCurrentSpeed(), getDirection());
     }
 
     @Override

@@ -1,16 +1,15 @@
 import java.awt.*;
-import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Peterbilt extends Car implements Flatbed{
 
     private boolean rampIsDown = false;
-    private StackLoadCar<Car> load;
+    private Transporter<Car> load;
 
     public Peterbilt() {
         super(2, 700, Color.blue, "Peterbilt", Size.BIG);
 
-        load = new StackLoadCar<>(new Size[]{Size.MEDIUM, Size.SMALL, Size.TINY});
+        load = new Transporter<>(new Size[]{Size.MEDIUM, Size.SMALL, Size.TINY});
     }
 
     /**
@@ -18,7 +17,7 @@ public class Peterbilt extends Car implements Flatbed{
      * @param car to be checked if can be put on stack
      */
     public void addCar(Car car){
-            load.loadVehicle(getxPos(), getyPos(), car, rampIsDown);
+            load.loadTransportable(getxPos(), getyPos(), car, rampIsDown);
     }
 
     /**
@@ -26,7 +25,7 @@ public class Peterbilt extends Car implements Flatbed{
      * Move car backwards so it is not in the same position as the truck
      */
     public void unloadCar(){
-        Car car = load.unloadLastVehicle(rampIsDown, xPos - 10, yPos);
+        Car car = load.unloadLastTransportable(rampIsDown, xPos - 10, yPos);
     }
 
     /**
@@ -35,7 +34,7 @@ public class Peterbilt extends Car implements Flatbed{
     @Override
     public void move() {
         super.move();
-        load.moveCars(getCurrentSpeed(), getDirection());
+        load.followTransport(getCurrentSpeed(), getDirection());
     }
 
     @Override
@@ -56,7 +55,7 @@ public class Peterbilt extends Car implements Flatbed{
     }
 
     public Deque<Car> getLoad() {
-        return load.cars;
+        return load.loadStack;
     }
 
     public boolean getRampIsDown(){
