@@ -11,7 +11,7 @@ public class Peterbilt extends Car implements Flatbed{
     public Peterbilt() {
         super(2, 700, Color.blue, "Peterbilt", Size.BIG);
 
-        load = new StackLoadCar(new Size[]{Size.MEDIUM, Size.SMALL, Size.TINY});
+        load = new StackLoadCar<Car>(new Size[]{Size.MEDIUM, Size.SMALL, Size.TINY});
     }
 
     /**
@@ -19,7 +19,6 @@ public class Peterbilt extends Car implements Flatbed{
      * @param car to be checked if can be put on stack
      */
     public void addCar(Car car){
-        if(Math.abs(getxPos() - car.getxPos()) < maxLoadDistance && Math.abs(getyPos() - car.getyPos()) < maxLoadDistance)
             load.loadVehicle(getxPos(), getyPos(), car, rampIsDown);
     }
 

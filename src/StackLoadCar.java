@@ -3,11 +3,11 @@ import java.util.Deque;
 
 public class StackLoadCar<T extends Car> {
     Deque<T> cars;
-    Size[] availableSizes;
+    Size[] allowedSizes;
     double loadDistance = 10;
 
     public StackLoadCar(Size[] sizes){
-        availableSizes = sizes;
+        allowedSizes = sizes;
 
         cars = new ArrayDeque<>();
     }
@@ -21,9 +21,15 @@ public class StackLoadCar<T extends Car> {
      */
     void loadVehicle(double xPos, double yPos, T car, boolean canLoad){
         if(car != null && correctSize(car.getSize()) && canLoad){
-            cars.push(car);
-            car.loadSelf();
-            car.stopEngine();
+            if(Math.abs(xPos - car.getxPos()) < loadDistance && Math.abs(yPos - car.getyPos()) < loadDistance) {
+                cars.push(car);
+                car.loadSelf();
+                car.stopEngine();
+            } else{
+                System.out.println("Loading failed: Car is too far away!");
+            }
+        } else{
+            System.out.println("Loading failed: Car is null/Wrong size or Transport can't load!");
         }
     }
 
@@ -71,14 +77,12 @@ public class StackLoadCar<T extends Car> {
 
 
     private boolean correctSize(Size testSize){
-        boolean isRightSize = false;
-
-        for(Size size : availableSizes){
+        for(Size size : allowedSizes){
             if(size == testSize){
-                isRightSize = true;
+                return true;
             }
         }
-        return isRightSize;
+        return false;
     }
 
 }
