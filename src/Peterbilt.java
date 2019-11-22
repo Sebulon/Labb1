@@ -5,13 +5,12 @@ import java.util.Deque;
 public class Peterbilt extends Car implements Flatbed{
 
     private boolean rampIsDown = false;
-    private final int maxLoadDistance = 10;
     private StackLoadCar<Car> load;
 
     public Peterbilt() {
         super(2, 700, Color.blue, "Peterbilt", Size.BIG);
 
-        load = new StackLoadCar<Car>(new Size[]{Size.MEDIUM, Size.SMALL, Size.TINY});
+        load = new StackLoadCar<>(new Size[]{Size.MEDIUM, Size.SMALL, Size.TINY});
     }
 
     /**
@@ -36,11 +35,7 @@ public class Peterbilt extends Car implements Flatbed{
     @Override
     public void move() {
         super.move();
-        for(Car c : load.cars){
-            c.setxPos(this.getxPos());
-            c.setyPos(this.getyPos());
-            c.setDirection(getDirection());
-        }
+        load.moveCars(getCurrentSpeed(), getDirection());
     }
 
     @Override

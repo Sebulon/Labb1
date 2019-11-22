@@ -69,11 +69,18 @@ public class StackLoadCar<T extends Car> {
     }
 
     private void moveCar(T car, double newX, double newY){
-        car.setxPos(newX);
-        car.setyPos(newY);
+        car.setXPos(newX);
+        car.setYPos(newY);
         car.unloadSelf();
     }
 
+    void moveCars (double speed, double direction){
+        for(T car : cars){
+            car.setSpeed(speed);
+            car.setDirection(direction);
+            car.move();
+        }
+    }
 
 
     private boolean correctSize(Size testSize){

@@ -22,19 +22,24 @@ public abstract class Car extends MotorVehicle {
         return nrDoors;
     }
 
+    void setXPos(double xPos){
+        if(loaded)
+            this.xPos = xPos;
+    }
+
+    void setYPos(double yPos){
+        if(loaded)
+            this.yPos = yPos;
+    }
+
     void setDirection(double direction) {
         if(loaded)
             this.direction = direction;
     }
 
-    void setxPos(double xPos) {
+    void setSpeed(double speed){
         if(loaded)
-            this.xPos = xPos;
-    }
-
-    void setyPos(double yPos) {
-        if(loaded)
-            this.yPos = yPos;
+            this.currentSpeed = speed;
     }
 
 
