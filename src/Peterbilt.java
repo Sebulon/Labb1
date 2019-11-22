@@ -6,7 +6,7 @@ public class Peterbilt extends Car implements Flatbed{
 
     private boolean rampIsDown = false;
     private final int maxLoadDistance = 10;
-    private StackLoadCar load;
+    private StackLoadCar<Car> load;
 
     public Peterbilt() {
         super(2, 700, Color.blue, "Peterbilt", Size.BIG);
@@ -28,13 +28,7 @@ public class Peterbilt extends Car implements Flatbed{
      * Move car backwards so it is not in the same position as the truck
      */
     public void unloadCar(){
-        Car car = load.unloadLastVehicle(rampIsDown);
-        if(car != null){
-            car.unloadSelf();
-            car.currentSpeed = -10;
-            car.move();
-            car.currentSpeed = 0;
-        }
+        Car car = load.unloadLastVehicle(rampIsDown, xPos - 10, yPos);
     }
 
     /**

@@ -5,6 +5,7 @@ public class CommandLine {
 
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         Car currentCar = null;
         boolean hasChosenACar = false;
