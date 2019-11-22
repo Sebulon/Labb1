@@ -1,3 +1,6 @@
+/**
+ * Framework for an object that can be transported
+ */
 public interface Transportable {
     void loadSelf();
     void unloadSelf();

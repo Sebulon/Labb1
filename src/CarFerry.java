@@ -1,9 +1,12 @@
 import java.awt.*;
 
+/**
+ * A ferry that can carry all cars that is within the right size
+ */
 public class CarFerry extends MotorVehicle{
 
-    Transporter<Car> carLoad;
-    boolean docked;
+    private Transporter<Car> carLoad;
+    private boolean docked;
 
     public CarFerry() {
         super(21000, Color.WHITE, "Stena", Size.GIANT);
@@ -17,7 +20,8 @@ public class CarFerry extends MotorVehicle{
      * @param car
      */
     public void loadCar(Car car){
-        carLoad.loadTransportable(getxPos(), getyPos(), car, docked);
+        if(docked)
+            carLoad.loadTransportable(getxPos(), getyPos(), car);
     }
 
     /**
@@ -25,9 +29,10 @@ public class CarFerry extends MotorVehicle{
      * @return the unloaded car
      */
     public Car unloadCar(){
-        return carLoad.unloadFirstTransportable(docked,
-                10 * Math.cos(Math.toRadians(getDirection())),
+        if(docked)
+            return carLoad.unloadFirstTransportable(10 * Math.cos(Math.toRadians(getDirection())),
                 10 * Math.sin(Math.toRadians(getDirection())));
+        return null;
     }
 
     /**

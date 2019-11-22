@@ -1,5 +1,8 @@
 import java.awt.*;
 
+/**
+ * Abstract class for motor-powered vehicles
+ */
 public abstract class MotorVehicle implements Movable, Engine {
     final double enginePower;
     private Color color;

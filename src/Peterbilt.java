@@ -6,6 +6,9 @@ public class Peterbilt extends Car implements Flatbed{
     private boolean rampIsDown = false;
     private Transporter<Car> load;
 
+    /**
+     * Truck that can carry cars
+     */
     public Peterbilt() {
         super(2, 700, Color.blue, "Peterbilt", Size.BIG);
 
@@ -17,15 +20,18 @@ public class Peterbilt extends Car implements Flatbed{
      * @param car to be checked if can be put on stack
      */
     public void addCar(Car car){
-            load.loadTransportable(getxPos(), getyPos(), car, rampIsDown);
+        if(rampIsDown)
+            load.loadTransportable(getxPos(), getyPos(), car);
     }
 
     /**
      * If ramp is down and method is called, remove car from stack (from flatbed)
      * Move car backwards so it is not in the same position as the truck
      */
-    public void unloadCar(){
-        Car car = load.unloadLastTransportable(rampIsDown, xPos - 10, yPos);
+    public Car unloadCar(){
+        if(rampIsDown)
+            return load.unloadLastTransportable(xPos - 10, yPos);
+        return null;
     }
 
     /**
@@ -54,11 +60,11 @@ public class Peterbilt extends Car implements Flatbed{
         rampIsDown = false;
     }
 
-    public Deque<Car> getLoad() {
+    Deque<Car> getLoad() {
         return load.loadStack;
     }
 
-    public boolean getRampIsDown(){
+    boolean getRampIsDown(){
         return rampIsDown;
     }
 }

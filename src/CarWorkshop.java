@@ -1,5 +1,9 @@
+/**
+ * A workshop for cars
+ * @param <T> a specification of which cars that can be in this workshop
+ */
 public class CarWorkshop <T extends Car>{
-    private Transporter<T> garage;
+    private Container<T> garage;
     private int maxAmount;
     private final double xPos;
     private final double yPos;
@@ -14,11 +18,14 @@ public class CarWorkshop <T extends Car>{
 
     public void loadCar(T car){
         boolean canLoad = maxAmount > garage.loadStack.size() && isOpen;
-        garage.loadTransportable(xPos, yPos, car, canLoad);
+        if(canLoad)
+            garage.loadTransportable(xPos, yPos, car);
     }
 
     public T unloadCar(){
-        return garage.unloadFirstTransportable(isOpen, xPos - 10, yPos);
+        if(isOpen)
+            return garage.unloadFirstTransportable( xPos - 10, yPos);
+        return null;
     }
 
     public void open(){

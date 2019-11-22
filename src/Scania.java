@@ -7,6 +7,9 @@ public class Scania extends Car implements Flatbed{
     private final int maxAngle = 70;
     private final int angleInc = 10;
 
+    /**
+     * A truck with a flatbed
+     */
     public Scania(){
         super(2, 350, Color.white, "LBS141", Size.BIG);
         stopEngine();
